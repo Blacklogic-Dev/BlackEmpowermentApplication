@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Your Application | Black Empowerment</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+ 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #000;
+      color: #fff;
+    }
+
+    header {
+      background: #FFD700;
+      color: #000;
+      padding: 20px;
+      text-align: center;
+    }
+    nav.top-nav {
+      display: flex;
+      justify-content: center;
+      background-color: #000;
+      padding: 10px 0;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    nav.top-nav a {
+      color: #FFD700;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: color 0.3s ease;
+    }
+
+    nav.top-nav a:hover {
+      color: #fff;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    input {
+      padding: 10px;
+      width: 100%;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background: limegreen;
+      color: #000;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .dashboard {
+      display: none;
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .status-box {
+      background: #222;
+      margin-top: 15px;
+      padding: 15px;
+      border-left: 8px solid limegreen;
+      border-radius: 6px;
+    }
+
+    .status-box h4 {
+      margin: 0;
+      color: #FFD700;
+    }
+
+    .status-box p {
+      margin: 5px 0 0;
+    }
+
+    footer {
+      margin-top: 30px;
+      text-align: center;
+      font-size: 0.9em;
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+ 
+  <header>
+    <h1>Track Your Application</h1>
+  </header>
+  <nav class="top-nav">
+    <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="apply.html"><i class="fas fa-file-alt"></i> Apply</a>
+    <a href="robot.html"><i class="fas fa-robot"></i> Chatbot</a>
+    <a href="#"><i class="fas fa-search-location"></i> Track</a>
+  </nav>
+
+
+  <div class="container">
+    <div class="form-section">
+      <label for="studentId">Enter Your Student ID:</label>
+      <input type="text" id="studentId" placeholder="e.g. 25894447">
+      <button onclick="trackApplication()">Track Application</button>
+    </div>
+
+    <div id="dashboard" class="dashboard">
+      <h2>Application Dashboard</h2>
+
+      <div class="status-box">
+        <h4>University Choice 1</h4>
+        <p>Institution: <span id="uni1"></span></p>
+        <p>Course: <span id="course1"></span></p>
+        <p>Status: <strong style="color:limegreen;">Accepted</strong></p>
+      </div>
+
+      <div class="status-box">
+        <h4>University Choice 2</h4>
+        <p>Institution: <span id="uni2"></span></p>
+        <p>Course: <span id="course2"></span></p>
+        <p>Status: <strong style="color:orange;">Pending Review</strong></p>
+      </div>
+
+      <div class="status-box">
+        <h4>University Choice 3</h4>
+        <p>Institution: <span id="uni3"></span></p>
+        <p>Course: <span id="course3"></span></p>
+        <p>Status: <strong style="color:red;">Not Selected</strong></p>
+      </div>
+
+      <div class="status-box">
+        <h4>Financial Aid</h4>
+        <p>Bursary Type: <span id="bursary"></span></p>
+        <p>Status: <strong style="color:limegreen;">Approved</strong></p>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Black Empowerment | Designed by BlackLogic & Queen Asanda</p>
+  </footer>
+
+  <script>
+    function trackApplication() {
+      const id = document.getElementById('studentId').value;
+
+      // Simulate backend check (replace with actual fetch logic)
+      if (id.startsWith("25") && id.length === 8) {
+        document.getElementById('dashboard').style.display = 'block';
+
+        // These values would normally come from a backend
+        document.getElementById('uni1').textContent = "Durban University of Technology";
+        document.getElementById('course1').textContent = "Civil Engineering (Full-Time)";
+
+        document.getElementById('uni2').textContent = "University of Johannesburg";
+        document.getElementById('course2').textContent = "Business Management (Part-Time)";
+
+        document.getElementById('uni3').textContent = "North-West College";
+        document.getElementById('course3').textContent = "Graphic Design (Full-Time)";
+
+        document.getElementById('bursary').textContent = "NSFAS";
+      } else {
+        alert("Invalid Student ID. Please enter a valid ID starting with 25");
+      }
+    }
+  </script>
+
+</body>
+</html>
+

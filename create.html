@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Account | Black Empowerment</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #FFD700, #000);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #000;
+      color: #FFD700;
+      padding: 20px 0;
+      text-align: center;
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+
+    nav.top-nav {
+      display: flex;
+      justify-content: center;
+      background-color: #000;
+      padding: 10px 0;
+      gap: 30px;
+    }
+
+    nav.top-nav a {
+      color: #FFD700;
+      text-decoration: none;
+      font-size: 1.2em;
+      transition: color 0.3s ease;
+    }
+
+    nav.top-nav a:hover {
+      color: #fff;
+    }
+
+    .container {
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .container h1 {
+      font-size: 2.5em;
+      color: #FFD700;
+    }
+
+    form {
+      background-color: #333;
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      width: 100%;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 15px 0;
+      border: 2px solid #FFD700;
+      border-radius: 5px;
+      background-color: #555;
+      color: #fff;
+    }
+
+    input[type="submit"] {
+      background-color: #FFD700;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #ffcc00;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 1.2em;
+      color: #FFD700;
+    }
+
+    footer {
+      margin-top: 30px;
+      background-color: #000;
+      color: #FFD700;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    nav.footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 10px;
+    }
+
+    nav.footer-nav a {
+      color: #FFD700;
+      text-decoration: none;
+      font-size: 1.1em;
+    }
+
+    .social-icons {
+      margin: 10px 0;
+    }
+
+    .social-icons a {
+      color: #FFD700;
+      margin: 0 10px;
+      font-size: 1.3em;
+      text-decoration: none;
+    }
+
+    .credits {
+      margin-top: 10px;
+      font-size: 0.8em;
+      color: #FFD700;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>Create Account - Black Empowerment</div>
+   
+  </header>
+     <nav class="top-nav">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="apply.html"><i class="fas fa-file-alt"></i> Apply</a>
+      <a href="#"><i class="fas fa-robot"></i> Chatbot</a>
+     
+      <a href="#"><i class="fas fa-search-location"></i> Track Application</a>
+    </nav>
+  
+
+  <div class="container">
+    <h1>Create Your Account</h1>
+    <form id="createAccountForm">
+      <input type="text" id="firstName" placeholder="Enter First Name" required>
+      <input type="text" id="lastName" placeholder="Enter Surname" required>
+      <input type="email" id="email" placeholder="Enter Email" required>
+      <input type="text" id="phone" placeholder="Enter Cellphone Number" required>
+      <input type="submit" value="Create Account">
+    </form>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <footer>
+    <nav class="footer-nav">
+      <a href="upload.html"><i class="fas fa-user-circle"></i> Account</a>
+      <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+       <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+      <a href="#"><i class="fas fa-upload"></i> Submit Documents</a>
+    </nav>
+    <div class="social-icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+    </div>
+    <div class="credits">
+      <h6>Designed by BlackLogic and Queen Asanda</h6>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('createAccountForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var firstName = document.getElementById('firstName').value;
+      var lastName = document.getElementById('lastName').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value;
+
+      var studentId = "BE-" + firstName.charAt(0).toUpperCase() + lastName.charAt(0).toUpperCase() + Math.floor(Math.random() * 10000);
+      var password = Math.random().toString(36).slice(-8);
+
+      var result = `
+        <p>Thank you for registering, ${firstName} ${lastName}!</p>
+        <p><strong>Student Temporary ID:</strong> ${studentId}</p>
+        <p><strong>Password:</strong> ${password}</p>
+      `;
+      document.getElementById('result').innerHTML = result;
+    });
+  </script>
+</body>
+</html>

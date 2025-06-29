@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Freedom - Smart AI Assistant</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    nav.top-nav {
+      display: flex;
+      justify-content: center;
+      background-color: #000;
+      padding: 15px;
+      gap: 30px;
+    }
+
+    nav.top-nav a {
+      color: #FFD700;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+
+    nav.top-nav a:hover {
+      color: #fff;
+    }
+
+    .container {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .robot-icon {
+      font-size: 70px;
+      color: #FFD700;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 2em;
+      color: #FFD700;
+    }
+
+    .chat-box {
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+      text-align: left;
+      min-height: 300px;
+      overflow-y: auto;
+    }
+
+    .chat-message {
+      margin-bottom: 20px;
+    }
+
+    .user-message {
+      color: lightgreen;
+      font-weight: bold;
+    }
+
+    .ai-message {
+      color: #FFD700;
+    }
+
+    .suggestions {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .suggestions button {
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .suggestions button:hover {
+      background-color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+<nav class="top-nav">
+  <a href="index.html"><i class="fas fa-home"></i> Home</a>
+  <a href="apply.html"><i class="fas fa-file-alt"></i> Apply</a>
+  
+  <a href="track.html"><i class="fas fa-search-location"></i> Track</a>
+  <a href="upload.html"><i class="fas fa-user"></i> Account</a>
+</nav>
+
+<div class="container">
+  <div class="robot-icon"><i class="fas fa-robot"></i></div>
+  <h1>Freedom - Your Smart AI Assistant</h1>
+  <p>Hi! I'm <strong>Freedom</strong>, your digital assistant from <strong>Black Empowerment</strong> designed by <strong>BlackLogic</strong> to help you discover careers and institutions. Select a question below to get started!</p>
+
+  <div class="chat-box" id="chatBox">
+    <div class="chat-message ai-message">👋 Hello! How can I help you today?</div>
+  </div>
+
+  <div class="suggestions" id="suggestionsBox"></div>
+</div>
+
+<script>
+  const chatBox = document.getElementById("chatBox");
+  const suggestionsBox = document.getElementById("suggestionsBox");
+
+  const categories = {
+    career: [
+      "What career is best for me if I like math?",
+      "What careers pay the most in South Africa?",
+      "Which career is best for introverts?",
+      "How do I become a software developer?",
+      "Is engineering a good career choice?"
+    ],
+    institutions: [
+      "Which is the best university for law in SA?",
+      "What does DUT specialize in?",
+      "Which universities offer computer science?",
+      "Tell me about University of Cape Town.",
+      "Which universities accept NSFAS?"
+    ],
+    advice: [
+      "How do I choose the right course?",
+      "Can I study part-time and work?",
+      "What is the difference between diploma and degree?",
+      "How do I prepare for university life?",
+      "Should I take a gap year?"
+    ]
+  };
+
+  const responses = {
+    // Career Responses
+    "What career is best for me if I like math?": "If you love math, consider careers like Actuary, Data Analyst, Engineer, or Statistician!",
+    "What careers pay the most in South Africa?": "Top paying careers include Doctors, Actuaries, Software Engineers, and Chartered Accountants.",
+    "Which career is best for introverts?": "Introverts may thrive as writers, designers, programmers, researchers, or lab technicians.",
+    "How do I become a software developer?": "Study Computer Science or IT, practice coding, build projects, and apply for internships.",
+    "Is engineering a good career choice?": "Yes! Engineering offers great pay, growth, and many specialization options.",
+
+    // Institution Responses
+    "Which is the best university for law in SA?": "University of Pretoria and UCT are top-ranked for Law in South Africa.",
+    "What does DUT specialize in?": "Durban University of Technology specializes in applied sciences, engineering, and arts.",
+    "Which universities offer computer science?": "Most major universities like UCT, Wits, and UJ offer Computer Science programs.",
+    "Tell me about University of Cape Town.": "UCT is the top-ranked university in Africa, known for excellence in Law, Business, and Science.",
+    "Which universities accept NSFAS?": "Most public universities and TVET colleges in South Africa accept NSFAS funding.",
+
+    // Advice Responses
+    "How do I choose the right course?": "Think about your strengths, interests, and job prospects. Explore and ask questions!",
+    "Can I study part-time and work?": "Yes! Many institutions offer part-time or online learning options.",
+    "What is the difference between diploma and degree?": "A degree is more theoretical and longer. A diploma is shorter and practical.",
+    "How do I prepare for university life?": "Stay organized, manage your time, ask for help, and join campus activities.",
+    "Should I take a gap year?": "A gap year can help you refocus, gain experience, and save money—but have a plan."
+  };
+
+  let currentCategory = "career";
+
+  function showSuggestions(category) {
+    suggestionsBox.innerHTML = '';
+    categories[category].forEach(q => {
+      const btn = document.createElement("button");
+      btn.textContent = q;
+      btn.onclick = () => respondToQuestion(q);
+      suggestionsBox.appendChild(btn);
+    });
+  }
+
+  function respondToQuestion(question) {
+    const userDiv = document.createElement("div");
+    userDiv.className = "chat-message user-message";
+    userDiv.textContent = "👤 " + question;
+    chatBox.appendChild(userDiv);
+
+    const aiDiv = document.createElement("div");
+    aiDiv.className = "chat-message ai-message";
+    aiDiv.textContent = "🤖 " + (responses[question] || "I'm still learning that. Please try another question.");
+    chatBox.appendChild(aiDiv);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    // Rotate category for next suggestions
+    if (currentCategory === "career") currentCategory = "institutions";
+    else if (currentCategory === "institutions") currentCategory = "advice";
+    else currentCategory = "career";
+
+    showSuggestions(currentCategory);
+  }
+
+  // Start with career questions
+  showSuggestions(currentCategory);
+</script>
+
+</body>
+</html>

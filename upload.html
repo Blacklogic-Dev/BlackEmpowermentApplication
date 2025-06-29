@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Account Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1f1f1f;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+      color: #FFD700;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 10px #00000088;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: #FFD700;
+    }
+
+    .info-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .info-box {
+      flex: 1;
+      min-width: 220px;
+      background: #2a2a2a;
+      padding: 15px;
+      border-radius: 8px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #333;
+      color: white;
+    }
+
+    button {
+      margin-top: 15px;
+      background: limegreen;
+      color: black;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #32cd32;
+    }
+
+    .logout {
+      float: right;
+      color: red;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    canvas {
+      width: 100% !important;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    @media (max-width: 600px) {
+      .info-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    Student Dashboard
+    <span class="logout" onclick="logout()">🚪 Logout</span>
+  </header>
+
+  <div class="container">
+
+    <div class="card">
+      <h2>Account Information</h2>
+      <div class="info-group">
+        <div class="info-box">
+          <label>Full Name</label>
+          <div id="fullname">Loading...</div>
+        </div>
+        <div class="info-box">
+          <label>Email</label>
+          <div id="email">Loading...</div>
+        </div>
+        <div class="info-box">
+          <label>Student ID</label>
+          <div id="studentId">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Change Password</h2>
+      <label>Old Password</label>
+      <input type="password" id="oldPassword">
+      <label>New Password</label>
+      <input type="password" id="newPassword">
+      <label>Confirm New Password</label>
+      <input type="password" id="confirmPassword">
+      <button onclick="changePassword()">Update Password</button>
+    </div>
+
+    <div class="card">
+      <h2>Application Progress</h2>
+      <canvas id="progressChart"></canvas>
+    </div>
+
+  </div>
+
+  <script>
+    // Mock Data (could come from localStorage, API, etc.)
+    const userData = {
+      fullname: "Mthokozisi Mathebula",
+      email: "mthoko@example.com",
+      studentId: "STU-843212"
+    };
+
+    // Load account info
+    document.getElementById("fullname").textContent = userData.fullname;
+    document.getElementById("email").textContent = userData.email;
+    document.getElementById("studentId").textContent = userData.studentId;
+
+    // Change Password Logic
+    function changePassword() {
+      const oldPass = document.getElementById("oldPassword").value;
+      const newPass = document.getElementById("newPassword").value;
+      const confirmPass = document.getElementById("confirmPassword").value;
+
+      if (!oldPass || !newPass || !confirmPass) {
+        alert("Please fill all fields.");
+        return;
+      }
+      if (newPass !== confirmPass) {
+        alert("New passwords do not match.");
+        return;
+      }
+
+      alert("Password updated successfully!");
+      // Here you’d normally call a backend API
+    }
+
+    // Logout logic
+    function logout() {
+      alert("Logging out...");
+      window.location.href = "Login.html";
+    }
+
+    // Chart Setup
+    const ctx = document.getElementById('progressChart').getContext('2d');
+    const progressChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Personal Info', 'Next of Kin', 'University', 'Courses', 'Funding'],
+        datasets: [{
+          label: 'Application Completion (%)',
+          data: [100, 100, 90, 80, 75],
+          backgroundColor: ['#FFD700', '#00ff00', '#00ced1', '#ffa500', '#ff6347']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: { mode: 'index', intersect: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+            ticks: {
+              color: '#fff'
+            }
+          },
+          x: {
+            ticks: {
+              color: '#fff'
+            }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
