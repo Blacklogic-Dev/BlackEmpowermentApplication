@@ -1,7 +1,7 @@
 # ✊🏾 Black Empowerment Online Application 🎓
 
 Welcome to the official **Black Empowerment Online Application** platform!  
-Designed by **BlackLogic** 🧠 and co-piloted by our AI assistant **Freedom 🤖**, this digital application system helps South African youth apply to top universities with ease and confidence.
+Designed by **BlackLogic **Queen Asanda 🧠 with co-piloted by our AI assistant **Freedom 🤖**, this digital application system helps South African youth apply to top universities with ease and confidence.
 
 ---
 
@@ -63,8 +63,7 @@ Let **Freedom** guide you with pre-suggested questions that are just one tap awa
 ## 📣 Connect With Us
 
 - 💬 WhatsApp for document submissions & queries 060 661 4909
-- 📧 Email: blackcompound@yourdomain.com
-- 🌐 Website: [Black Empowerment Application](https://your-deployment-link.com)
+- 📧 Email: blackempowerment34@gmail.com
 
 ---
 
@@ -73,7 +72,7 @@ Let **Freedom** guide you with pre-suggested questions that are just one tap awa
 - HTML5 + CSS3 🎨  
 - JavaScript (Vanilla) ⚙️  
 - jsPDF for PDF generation 📄  
-- 💡 Designed in 2 days by a 21-year-old student with 33+ certifications in AI, Data Science, ML, Web & Software Engineering.
+- 💡 Designed in 2 days by a 21-year-old student with 70+ certifications in AI and ML engineering, Data Science, ML, Web & Software Engineering.From Microsoft,Microsoft x DUT 
 
 ---
 
